@@ -6,6 +6,7 @@ coords = (0, 0)
 def mouseClick(event):
     print("Mouse position: (%s %s)" % (event.x, event.y))
     global coords
+    if (coords[0] >= 0) & (coords[1] >= 0)
     coords = (event.x,event.y)
     canvas.coords(rectangle, coords[0], coords[1], coords[0]+15, coords[1]+15)
 
