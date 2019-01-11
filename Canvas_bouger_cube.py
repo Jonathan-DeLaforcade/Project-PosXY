@@ -21,7 +21,7 @@ fenetre = Tk()
 
 fenetre['bg']='bisque'
 fenetre.title('Commande CMS')
-fenetre.geometry('800x550')
+fenetre.geometry('850x660')
 
 FrameTitle = Frame(fenetre, borderwidth=2, relief=GROOVE, width=900, height=30, bg="Gray82")
 FrameTitle.pack(side=TOP, padx=2, pady=2, ipadx=300)
