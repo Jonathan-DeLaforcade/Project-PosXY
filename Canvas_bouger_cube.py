@@ -14,6 +14,7 @@ def mouseClick(event):
         coords = (event.x,event.y)
         set_text(PosXEdit,str(event.x))
         set_text(PosYEdit,str(event.y))
+        ListBoxHistory.insert(END, str(event.x) + " : " + str(event.y))
         print("Mouse position: (%s %s)" % (coords[0],coords[1]))
         canvas.coords(rectangle, coords[0]-6, coords[1]-6, coords[0]+6, coords[1]+6)
 
@@ -28,8 +29,18 @@ FrameTitle.pack(side=TOP, padx=2, pady=2, ipadx=300)
 Label(FrameTitle, text="Commande CMS | By Jonathan de Laforcade & Quentin Balanant").pack(pady=8)
 
 
-FrameMenu = LabelFrame(fenetre, text="Menu", borderwidth=2, relief=GROOVE, width=250, height=500, bg="Gray67")
-FrameMenu.pack(side=LEFT, padx=4, pady=4)
+FrameMenu = LabelFrame(fenetre, text="Historique", borderwidth=2, relief=GROOVE, width=300, height=815, bg="Gray67")
+FrameMenu.pack(side=LEFT, padx=4, pady=4, ipadx=6, ipady=6)
+
+FrameMenuHistory = Frame(FrameMenu, width=300, height=525, bg="Gray67")
+FrameMenuHistory.pack(side=TOP, padx=4, pady=4, ipadx=6, ipady=6)
+
+ListBoxHistory = Listbox(FrameMenuHistory, height=32)
+ListBoxHistory.pack(side=BOTTOM, fill=X, padx=0.5, pady=0.5)
+
+
+Boutton_Validate = Button(FrameMenu, text="Valider", command=fenetre.quit).pack(side=BOTTOM,fill=X)
+
 
 FramePos = LabelFrame(fenetre, text="Selection de la position", borderwidth=2, relief=GROOVE, width=500, height=500, bg="Gray47")
 FramePos.pack(side=RIGHT, padx=4, pady=4)
