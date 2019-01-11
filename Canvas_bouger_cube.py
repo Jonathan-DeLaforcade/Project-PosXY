@@ -6,9 +6,9 @@ coords = (0, 0)
 def mouseClick(event):
     print("Mouse position: (%s %s)" % (event.x, event.y))
     global coords
-    if (coords[0] >= 0) & (coords[1] >= 0)
-    coords = (event.x,event.y)
-    canvas.coords(rectangle, coords[0], coords[1], coords[0]+15, coords[1]+15)
+    if (event.x >= 0) & (event.y >= 0) & (event.x <= 240) & (event.y <= 240):
+        coords = (event.x,event.y)
+        canvas.coords(rectangle, coords[0], coords[1], coords[0]+15, coords[1]+15)
 
 fenetre = Tk()
 
