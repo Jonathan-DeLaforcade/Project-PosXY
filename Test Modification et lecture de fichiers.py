@@ -5,12 +5,12 @@ fenetre = Tk()
 listebox = Listbox(fenetre)
 listebox.pack(fill=X)
 
-
-
 fichier = open("data.txt", "a")
 for i in range(16):
     fichier.write("L"+str(i)+"\n")
 fichier.close()
+
+
 
 liste = []
 

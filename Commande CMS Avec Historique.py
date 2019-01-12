@@ -1,12 +1,19 @@
-# -*- coding: cp1252 -*-
 from Tkinter import *
 
 coords = (0, 0)
+nbHistory = 1
+
+
 
 def set_text(entry,text):
     entry.delete(0,END)
     entry.insert(0,text)
     return
+
+def addHistory():
+    global nbHistory
+    ListBoxHistory.insert(END, str(nbHistory) + ": (X: " + str(coords[0]) + " | Y:" + str(coords[1]) + ")")
+    nbHistory = nbHistory +1
 
 def mouseClick(event):
     global coords
@@ -14,9 +21,12 @@ def mouseClick(event):
         coords = (event.x,event.y)
         set_text(PosXEdit,str(event.x))
         set_text(PosYEdit,str(event.y))
-        ListBoxHistory.insert(END, str(event.x) + " : " + str(event.y))
         print("Mouse position: (%s %s)" % (coords[0],coords[1]))
-        canvas.coords(rectangle, coords[0]-6, coords[1]-6, coords[0]+6, coords[1]+6)
+        canvas.coords(rectangle,coords[0]-6, coords[1]-6, coords[0]+6, coords[1]+6)
+
+def dblClickHistory(event):
+    print "ok"
+
 
 fenetre = Tk()
 
@@ -36,10 +46,11 @@ FrameMenuHistory = Frame(FrameMenu, width=300, height=525, bg="Gray67")
 FrameMenuHistory.pack(side=TOP, padx=4, pady=4, ipadx=6, ipady=6)
 
 ListBoxHistory = Listbox(FrameMenuHistory, height=32)
+ListBoxHistory.bind("<Enter>",dblClickHistory)
 ListBoxHistory.pack(side=BOTTOM, fill=X, padx=0.5, pady=0.5)
 
 
-Boutton_Validate = Button(FrameMenu, text="Valider", command=fenetre.quit).pack(side=BOTTOM,fill=X)
+Boutton_Validate = Button(FrameMenu, text="Valider", command=addHistory).pack(side=BOTTOM,fill=X)
 
 
 FramePos = LabelFrame(fenetre, text="Selection de la position", borderwidth=2, relief=GROOVE, width=500, height=500, bg="Gray47")
