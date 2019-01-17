@@ -15,7 +15,7 @@ fenetre.title('Miguel le plus beau')
 L1 = Frame(fenetre, height=50, bg="Gray67")
 L1.pack(side=TOP, padx=4, pady=1, fill=X)
 
-Label(L1, text = "Design by Nirawin pour le con de minibosh", bg="Gray67").pack(side=TOP, pady=10)
+Label(L1, text = "Design by Jonathan De Laforcade", bg="Gray67").pack(side=TOP, pady=10)
 
 
 
