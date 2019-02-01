@@ -18,7 +18,7 @@ def addHistory():
 
 def mouseClick(event):
     global coords
-    if (event.x >= 8) & (event.y >= 8) & (event.x <= 498) & (event.y <= 498):
+    if (event.x >= 8) & (event.y >= 8) & (event.x <= 398) & (event.y <= 398):
         coords = (event.x,event.y)
         set_text(PosXEdit,str(event.x))
         set_text(PosYEdit,str(event.y))
@@ -42,15 +42,18 @@ def EditBoxPos():
         EditPosX = 8
     if (EditPosY < 8):
         EditPosY = 8
-    if (EditPosX > 498):
-        EditPosX = 498
-    if (EditPosY > 498):
-        EditPosY = 498
+    if (EditPosX > 398):
+        EditPosX = 398
+    if (EditPosY > 398):
+        EditPosY = 398
     
     set_text(PosXEdit,str(EditPosX))
     set_text(PosYEdit,str(EditPosY))
     canvas.coords(rectangle,EditPosX-6, EditPosY-6, EditPosX+6, EditPosY+6)
 
+def EnvoiePos():
+    print ("envoie pos:" + str(coords[0]) + " " + str(coords[1]))
+    
 fenetre = Tk()
 
 fenetre['bg']='bisque'
@@ -76,7 +79,7 @@ Boutton_Import = Button(FrameMenu, text="Importé des favoris", command=ImportHis
 Boutton_AddHistory = Button(FrameMenu, text="Ajouté aux favoris", command=addHistory).pack(side=BOTTOM,fill=X,pady=1)
 
 FramePos = LabelFrame(fenetre, text="Selection de la position", borderwidth=2, relief=GROOVE, width=500, height=500, bg="Gray47")
-FramePos.pack(side=RIGHT, padx=4, pady=4)
+FramePos.pack(side=RIGHT, padx=4, pady=4, ipadx=2, ipady=2)
 
 FramePosEditsLignes = Frame(FramePos, width=500, height=100, bg="Gray47")
 FramePosEditsLignes.pack(side=TOP, padx=4, pady=4)
@@ -87,8 +90,11 @@ FramePosEditsLigne1.pack(side=TOP, padx=4, pady=4)
 FramePosEditsLigne2 = Frame(FramePosEditsLignes, width=500, height=100, bg="Gray47")
 FramePosEditsLigne2.pack(side=TOP, padx=4, pady=4)
 
-FramePosCanvas = Frame(FramePos, borderwidth=2, relief=GROOVE, width=500, height=500, bg="Gray47")
+FramePosCanvas = Frame(FramePos, borderwidth=2, relief=GROOVE, width=400, height=400, bg="Gray47")
 FramePosCanvas.pack(side=BOTTOM, padx=4, pady=4)
+
+FramePosCanvasButtonLigne = Frame(FramePosCanvas, bg="Gray47")
+FramePosCanvasButtonLigne.pack(side=BOTTOM, padx=4, pady=4,fill=X)
 
 PosX = StringVar()
 PosY = StringVar()
@@ -100,8 +106,10 @@ PosYEdit = Entry(FramePosEditsLigne2, textvariable=PosY, width=30)
 
 Boutton_actualise = Button(FramePosEditsLignes, text="Actualisé", command=EditBoxPos).pack(pady=10,side=BOTTOM)
 
-canvas = Canvas(FramePosCanvas, width=500, height=500, bg="Gray37")
+canvas = Canvas(FramePosCanvas, width=400, height=400, bg="Gray37")
 rectangle = canvas.create_rectangle(0,0,12,12,fill="sky blue")
+
+Button_Envoie_Pos = Button(FramePosCanvasButtonLigne, text="Envoyer", command=EnvoiePos).pack(pady=10,side=RIGHT)
 
 canvas.bind("<Button-1>", mouseClick)
 canvas.bind("<B1-Motion>", mouseClick)
