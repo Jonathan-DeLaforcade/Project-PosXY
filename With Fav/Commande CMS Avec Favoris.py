@@ -1,10 +1,8 @@
 # -*- coding: cp1252 -*-
 from Tkinter import *
-
+import socket
 coords = (0, 0)
 nbHistory = 1
-
-
 
 def set_text(entry,text):
     entry.delete(0,END)
@@ -52,7 +50,25 @@ def EditBoxPos():
     canvas.coords(rectangle,EditPosX-6, EditPosY-6, EditPosX+6, EditPosY+6)
 
 def EnvoiePos():
-    print ("envoie pos:" + str(coords[0]) + " " + str(coords[1]))
+    
+    AddServer= "192.160.100.134"
+    NumPort= 55678
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_address=(AddServer,NumPort)
+    sock.settimeout(2)
+    sock.connect(server_address)
+    print 'Open socket'
+    CoordX = round(((coords[0]/398.0)*100),2)
+    CoordY = round(((coords[1]/398.0)*100),2)
+
+    message=("SX" + str(CoordX)+ "Y" + str(CoordY)+"F")
+    sock.sendall(message)
+    
+    reponse = sock.recv(80)
+    print '>Reponse du Server =',reponse
+
+    sock.close()
+
     
 fenetre = Tk()
 
